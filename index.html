@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EarnPro - Your Ultimate Earning Platform</title>
+    <meta name="description" content="Earn money online through multiple methods - Spin, Watch Ads, Download Apps, and Refer Friends">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-spinner"></div>
+            <h2>Loading EarnPro...</h2>
+        </div>
+
+        <!-- Auth Container -->
+        <div id="auth-container" class="auth-container hidden">
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form">
+                <div class="form-header">
+                    <h1><i class="fas fa-coins"></i> EarnPro</h1>
+                    <p>Your Ultimate Earning Platform</p>
+                </div>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="loginPhone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary glow">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                <p class="switch-auth">Don't have an account? <span id="showRegister">Register here</span></p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="auth-form hidden">
+                <div class="form-header">
+                    <h1><i class="fas fa-coins"></i> EarnPro</h1>
+                    <p>Join & Start Earning Today!</p>
+                </div>
+                <form id="registerForm">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="registerName" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="registerPhone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="registerPassword" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-primary glow">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+                <p class="switch-auth">Already have an account? <span id="showLogin">Login here</span></p>
+            </div>
+        </div>
+
+        <!-- User Dashboard -->
+        <div id="user-dashboard" class="dashboard-container hidden">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-content">
+                    <div class="user-info">
+                        <div class="avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="user-details">
+                            <h3 id="userName">Welcome Back!</h3>
+                            <p id="userPhone"></p>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button id="logoutBtn" class="btn-secondary">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Wallet Section -->
+            <section class="wallet-section">
+                <div class="wallet-card glow">
+                    <div class="wallet-header">
+                        <h3><i class="fas fa-wallet"></i> My Wallet</h3>
+                        <span class="balance" id="walletBalance">₹0.00</span>
+                    </div>
+                    <div class="wallet-stats">
+                        <div class="stat">
+                            <span class="label">Today's Earning</span>
+                            <span class="value" id="todayEarning">₹0.00</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Total Earned</span>
+                            <span class="value" id="totalEarned">₹0.00</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Referral Bonus</span>
+                            <span class="value" id="referralBonus">₹0.00</span>
+                        </div>
+                    </div>
+                    <button id="withdrawBtn" class="btn-primary glow">
+                        <i class="fas fa-money-bill-wave"></i> Withdraw
+                    </button>
+                </div>
+            </section>
+
+            <!-- Earning Options -->
+            <section class="earning-section">
+                <h3>Earning Options</h3>
+                <div id="earningOptions" class="earning-grid">
+                    <!-- Dynamic earning options will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Referral Section -->
+            <section class="referral-section">
+                <div class="referral-card">
+                    <h3><i class="fas fa-users"></i> Refer & Earn</h3>
+                    <p>Invite friends and earn ₹8 for each successful referral</p>
+                    <div class="referral-stats">
+                        <div class="stat">
+                            <span class="label">Total Referrals</span>
+                            <span class="value" id="totalReferrals">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Referral Earnings</span>
+                            <span class="value" id="referralEarnings">₹0.00</span>
+                        </div>
+                    </div>
+                    <div class="referral-link">
+                        <input type="text" id="referralLinkInput" readonly>
+                        <button id="copyReferralBtn" class="btn-primary">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="admin-panel" class="admin-container hidden">
+            <!-- Admin Login -->
+            <div id="admin-login" class="admin-login">
+                <div class="admin-form">
+                    <h2><i class="fas fa-shield-alt"></i> Admin Panel</h2>
+                    <form id="adminLoginForm">
+                        <div class="input-group">
+                            <i class="fas fa-key"></i>
+                            <input type="password" id="adminPassword" placeholder="Admin Password" required>
+                        </div>
+                        <button type="submit" class="btn-primary glow">Access Panel</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="admin-dashboard" class="admin-dashboard hidden">
+                <nav class="admin-nav">
+                    <h2><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
+                    <div class="nav-tabs">
+                        <button class="tab-btn active" data-tab="earning-options">Earning Options</button>
+                        <button class="tab-btn" data-tab="app-tasks">App Tasks</button>
+                        <button class="tab-btn" data-tab="proofs">Submitted Proofs</button>
+                        <button class="tab-btn" data-tab="users">Manage Users</button>
+                        <button class="tab-btn" data-tab="withdrawals">Withdrawals</button>
+                    </div>
+                    <button id="adminLogoutBtn" class="btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </nav>
+
+                <main class="admin-content">
+                    <!-- Earning Options Tab -->
+                    <div id="earning-options" class="tab-content active">
+                        <div class="content-header">
+                            <h3>Manage Earning Options</h3>
+                            <button id="addEarningOptionBtn" class="btn-primary">
+                                <i class="fas fa-plus"></i> Add New Option
+                            </button>
+                        </div>
+                        <div id="earningOptionsAdmin" class="options-grid"></div>
+                    </div>
+
+                    <!-- App Tasks Tab -->
+                    <div id="app-tasks" class="tab-content">
+                        <div class="content-header">
+                            <h3>App Download Tasks</h3>
+                            <button id="addTaskBtn" class="btn-primary">
+                                <i class="fas fa-plus"></i> Add Task
+                            </button>
+                        </div>
+                        <div id="tasksContainer" class="tasks-grid"></div>
+                    </div>
+
+                    <!-- Submitted Proofs Tab -->
+                    <div id="proofs" class="tab-content">
+                        <h3>Submitted Proofs</h3>
+                        <div id="proofsContainer" class="proofs-table"></div>
+                    </div>
+
+                    <!-- Users Tab -->
+                    <div id="users" class="tab-content">
+                        <h3>Manage Users</h3>
+                        <div id="usersContainer" class="users-table"></div>
+                    </div>
+
+                    <!-- Withdrawals Tab -->
+                    <div id="withdrawals" class="tab-content">
+                        <h3>Withdrawal Requests</h3>
+                        <div id="withdrawalsContainer" class="withdrawals-table"></div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <div id="modal-overlay" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Modal Title</h3>
+                    <button class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Modal content will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script type="module" src="js/supabase.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+    <script type="module" src="js/admin.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
